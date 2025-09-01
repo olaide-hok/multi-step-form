@@ -1,0 +1,45 @@
+{
+    "name": "multi-step-form",
+    "version": "0.1.0",
+    "description": "Multi Step Form",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/olaide-hok/multi-step-form.git"
+    },
+    "author": "Habeeb Kareem",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/olaide-hok/interactive-comments-section.git/issues"
+    },
+    "homepage": "https://github.com/olaide-hok/interactive-comments-section.git#readme",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint",
+        "test": "vitest"
+    },
+    "dependencies": {
+        "next": "15.5.2",
+        "react": "19.1.0",
+        "react-dom": "19.1.0",
+        "zustand": "^5.0.8"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3",
+        "@tailwindcss/postcss": "^4",
+        "@testing-library/dom": "^10.4.1",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "@vitejs/plugin-react": "^5.0.1",
+        "eslint": "^9",
+        "eslint-config-next": "15.5.2",
+        "jsdom": "^26.1.0",
+        "tailwindcss": "^4",
+        "typescript": "^5",
+        "vite-tsconfig-paths": "^5.1.4",
+        "vitest": "^3.2.4"
+    }
+}
