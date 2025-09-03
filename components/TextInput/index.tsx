@@ -29,6 +29,7 @@ const TextInput = ({
       </div>
 
       <input
+        id={props.name}
         placeholder={placeholder}
         className={`rounded-(--sp-100) border ${error ? "border-(--clr-red-500)" : "border-(--clr-purple-200)"} foucs:outline-(--clr-purple-600) px-(--sp-200) py-(--sp-100) text-(length:--fs-16) leading-(--lh-120) font-medium text-(--clr-blue-950) placeholder:text-(--clr-grey-500) focus:outline-1 active:bg-white`}
         {...props}
