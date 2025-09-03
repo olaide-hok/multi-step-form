@@ -1,67 +1,67 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 :root {
-    /* Colors */
-    --clr-white: hsl(0, 0%, 100%);
-    --clr-black: hsl(0, 0%, 0%);
+  /* Colors */
+  --clr-white: hsl(0, 0%, 100%);
+  --clr-black: hsl(0, 0%, 0%);
 
-    --clr-grey-500: hsl(231, 11%, 63%);
+  --clr-grey-500: hsl(231, 11%, 63%);
 
-    --clr-orange-300: hsl(23, 100%, 75%);
+  --clr-orange-300: hsl(23, 100%, 75%);
 
-    --clr-red-500: hsl(354, 84%, 57%);
-    --clr-red-450: hsl(353, 76%, 65%);
-    --clr-red-400: hsl(354, 91%, 74%);
+  --clr-red-500: hsl(354, 84%, 57%);
+  --clr-red-450: hsl(353, 76%, 65%);
+  --clr-red-400: hsl(354, 91%, 74%);
 
-    --clr-purple-600: hsl(243, 100%, 62%);
-    --clr-purple-500: hsl(243, 100%, 67%);
-    --clr-purple-400: hsl(243, 100%, 77%);
-    --clr-purple-200: hsl(229, 24%, 87%);
+  --clr-purple-600: hsl(243, 100%, 62%);
+  --clr-purple-500: hsl(243, 100%, 67%);
+  --clr-purple-400: hsl(243, 100%, 77%);
+  --clr-purple-200: hsl(229, 24%, 87%);
 
-    --clr-blue-950: hsl(213, 96%, 18%);
-    --clr-blue-700: hsl(213, 73%, 31%);
-    --clr-blue-300: hsl(228, 100%, 84%);
-    --clr-blue-200: hsl(206, 94%, 87%);
-    --clr-blue-100: hsl(218, 100%, 97%);
-    --clr-blue-50: hsl(231, 100%, 99%);
+  --clr-blue-950: hsl(213, 96%, 18%);
+  --clr-blue-700: hsl(213, 73%, 31%);
+  --clr-blue-300: hsl(228, 100%, 84%);
+  --clr-blue-200: hsl(206, 94%, 87%);
+  --clr-blue-100: hsl(218, 100%, 97%);
+  --clr-blue-50: hsl(231, 100%, 99%);
 
-    /* Font sizes */
-    --fs-12: 0.75rem;
-    --fs-14: 0.875rem;
-    --fs-16: 1rem;
-    --fs-24: 1.5rem;
-    --fs-32: 2rem;
+  /* Font sizes */
+  --fs-12: 0.75rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-24: 1.5rem;
+  --fs-32: 2rem;
 
-    /* Line height */
-    --lh-120: 120%;
-    --lh-150: 150%;
+  /* Line height */
+  --lh-120: 120%;
+  --lh-150: 150%;
 
-    /* Spacing */
-    --sp-100: 0.5rem;
-    --sp-200: 1rem;
-    --sp-300: 1.5rem;
-    --sp-400: 2rem;
-    --sp-500: 2.5rem;
-    --sp-700: 3.5rem;
+  /* Spacing */
+  --sp-100: 0.5rem;
+  --sp-200: 1rem;
+  --sp-300: 1.5rem;
+  --sp-400: 2rem;
+  --sp-500: 2.5rem;
+  --sp-700: 3.5rem;
 }
 
 body {
-    background: var(--background);
-    color: var(--clr-white);
-    font-family: 'Ubuntu', sans-serif;
+  background: var(--clr-blue-100);
+  color: var(--clr-black);
+  font-family: "Ubuntu", sans-serif;
 }
 
 .sidebar {
-    background-image: url('/images/bg-sidebar-mobile.svg');
-    /* background-size: cover; */
-    background-repeat: no-repeat;
+  background-image: url("/images/bg-sidebar-mobile.svg");
+  /* background-size: cover; */
+  background-repeat: no-repeat;
 }
 
 @media screen and (min-width: 768px) {
-    .sidebar {
-        background-image: url('/images/bg-sidebar-desktop.svg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 35.5rem;
-    }
+  .sidebar {
+    background-image: url("/images/bg-sidebar-desktop.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 35.5rem;
+  }
 }
