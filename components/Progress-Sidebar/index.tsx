@@ -10,7 +10,7 @@ const ProgressSidebar = () => {
   };
 
   return (
-    <section className="sidebar flex h-full py-(--sp-500) lg:w-[17.125rem] lg:flex-col lg:gap-y-(--sp-400) lg:px-(--sp-400)">
+    <section className="sidebar flex w-full flex-row items-start justify-center gap-x-(--sp-200) pt-(--sp-400) md:h-full md:flex-col md:justify-normal md:py-(--sp-500) lg:w-[17.125rem] lg:flex-col lg:gap-y-(--sp-400) lg:px-(--sp-400)">
       <div className="flex items-center gap-x-(--sp-200)">
         <button
           type="button"
@@ -23,7 +23,7 @@ const ProgressSidebar = () => {
         >
           1
         </button>
-        <div className="flex flex-col uppercase">
+        <div className="hidden flex-col uppercase md:flex">
           <span className="text-(length:--fs-12) leading-(--lh-120) text-(--clr-blue-300)">
             Step 1
           </span>
@@ -44,7 +44,7 @@ const ProgressSidebar = () => {
         >
           2
         </button>
-        <div className="flex flex-col uppercase">
+        <div className="hidden flex-col uppercase md:flex">
           <span className="text-(length:--fs-12) leading-(--lh-120) text-(--clr-blue-300)">
             Step 2
           </span>
@@ -65,7 +65,7 @@ const ProgressSidebar = () => {
         >
           3
         </button>
-        <div className="flex flex-col uppercase">
+        <div className="hidden flex-col uppercase md:flex">
           <span className="text-(length:--fs-12) leading-(--lh-120) text-(--clr-blue-300)">
             Step 3
           </span>
@@ -86,7 +86,7 @@ const ProgressSidebar = () => {
         >
           4
         </button>
-        <div className="flex flex-col">
+        <div className="hidden flex-col md:flex">
           <div className="flex flex-col uppercase">
             <span className="text-(length:--fs-12) leading-(--lh-120) text-(--clr-blue-300)">
               Step 4
