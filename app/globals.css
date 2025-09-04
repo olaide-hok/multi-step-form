@@ -53,8 +53,8 @@ body {
 
 .sidebar {
   background-image: url("/images/bg-sidebar-mobile.svg");
-  /* background-size: cover; */
   background-repeat: no-repeat;
+  height: 10.75rem;
 }
 
 @media screen and (min-width: 768px) {
