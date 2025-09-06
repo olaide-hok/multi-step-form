@@ -1,41 +1,28 @@
 "use client";
 
-import { useState } from "react";
 import Card from "../Card";
 
-const SelectPlan = () => {
-  const [isYearly, setIsYearly] = useState(false);
+interface SelectPlanProps {
+  isYearly: boolean;
+  setIsYearly: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const yearlyPlans = [
+const SelectPlan = ({ isYearly, setIsYearly }: SelectPlanProps) => {
+  const plans = [
     {
       plan: "arcade",
-      rate: "$90/yr",
-      bonus: "2 months free",
+      rate: isYearly ? "$90/yr" : "$9/mo",
+      bonus: isYearly ? "2 months free" : "",
     },
     {
       plan: "advanced",
-      rate: "$120/yr",
-      bonus: "2 months free",
+      rate: isYearly ? "$120/yr" : "$12/mo",
+      bonus: isYearly ? "2 months free" : "",
     },
     {
       plan: "pro",
-      rate: "$150/yr",
-      bonus: "2 months free",
-    },
-  ];
-
-  const monthlyPlans = [
-    {
-      plan: "arcade",
-      rate: "$9/mo",
-    },
-    {
-      plan: "advanced",
-      rate: "$12/mo",
-    },
-    {
-      plan: "pro",
-      rate: "$15/mo",
+      rate: isYearly ? "$150/yr" : "$15/mo",
+      bonus: isYearly ? "2 months free" : "",
     },
   ];
 
@@ -50,24 +37,15 @@ const SelectPlan = () => {
         </p>
       </div>
       <div className="flex flex-col gap-y-(--sp-100) lg:flex-row lg:gap-x-(--sp-200) lg:gap-y-(--sp-300)">
-        {isYearly
-          ? yearlyPlans.map((plan) => (
-              <Card
-                key={plan.plan}
-                selected
-                plan={plan.plan}
-                rate={plan.rate}
-                bonus={plan.bonus}
-              />
-            ))
-          : monthlyPlans.map((plan) => (
-              <Card
-                key={plan.plan}
-                selected
-                plan={plan.plan}
-                rate={plan.rate}
-              />
-            ))}
+        {plans.map((plan) => (
+          <Card
+            key={plan.plan}
+            selected
+            plan={plan.plan}
+            rate={plan.rate}
+            bonus={plan.bonus}
+          />
+        ))}
       </div>
 
       <div className="flex w-full items-center justify-center rounded-[0.5rem] bg-(--clr-blue-50) py-[0.84375rem]">
