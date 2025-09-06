@@ -9,33 +9,34 @@ import SelectPlan from "@/components/Forms/SelectPlan";
 import ProgressSidebar from "@/components/Progress-Sidebar";
 import FinalStep from "@/components/Forms/FinalStep";
 
-const steps = [
-  {
-    id: 1,
-    name: "Your Info",
-    component: <PersonalInfo />,
-  },
-  {
-    id: 2,
-    name: "Select Plan",
-    component: <SelectPlan />,
-  },
-  {
-    id: 3,
-    name: "Add-ons",
-    component: <AddOns />,
-  },
-  {
-    id: 4,
-    name: "Summary",
-    component: <FinishUp />,
-  },
-];
-
 export default function Home() {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [showFinalStep, setShowFinalStep] = useState(false);
+  const [isYearly, setIsYearly] = useState(false);
+
+  const steps = [
+    {
+      id: 1,
+      name: "Your Info",
+      component: <PersonalInfo />,
+    },
+    {
+      id: 2,
+      name: "Select Plan",
+      component: <SelectPlan isYearly={isYearly} setIsYearly={setIsYearly} />,
+    },
+    {
+      id: 3,
+      name: "Add-ons",
+      component: <AddOns isYearly={isYearly} />,
+    },
+    {
+      id: 4,
+      name: "Summary",
+      component: <FinishUp />,
+    },
+  ];
 
   const nextStep = () => {
     if (currentStep === steps.length - 1) return;
