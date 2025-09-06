@@ -1,6 +1,28 @@
 "use client";
 
-const AddOns = () => {
+interface AddOnsProps {
+  isYearly: boolean;
+}
+
+const AddOns = ({ isYearly }: AddOnsProps) => {
+  const addOnsRates = [
+    {
+      plan: "Online service",
+      description: "Access to multiplayer games",
+      rate: isYearly ? "$10/yr" : "$1/mo",
+    },
+    {
+      plan: "Larger storage",
+      description: "Extra 1TB of cloud save",
+      rate: isYearly ? "$20/yr" : "$2/mo",
+    },
+    {
+      plan: "Customizable profile",
+      description: "Custom theme on your profile",
+      rate: isYearly ? "$20/yr" : "$2/mo",
+    },
+  ];
+
   return (
     <div className="mx-(--sp-200) mb-[8.5rem] flex w-[21.4375rem] flex-col gap-y-(--sp-300) rounded-[0.625rem] bg-(--clr-white) px-(--sp-300) py-(--sp-400) shadow-[0_25px_40px_-20px_rgba(0,0,0,0.10)] md:m-0 md:w-full md:gap-y-(--sp-400) md:px-0 md:py-0 md:pt-[1.69rem] md:shadow-none lg:gap-y-(--sp-500)">
       <div className="flex flex-col gap-y-(--sp-100)">
@@ -13,22 +35,14 @@ const AddOns = () => {
       </div>
 
       <div className="flex flex-col gap-y-(--sp-100) lg:gap-y-(--sp-200)">
-        <CheckboxTile
-          label="Online service"
-          description="Access to multiplayer games"
-          rate="+$1/mo"
-          selected
-        />
-        <CheckboxTile
-          label="Larger storage"
-          description="Extra 1TB of cloud save"
-          rate="+$2/mo"
-        />
-        <CheckboxTile
-          label="Customizable profile"
-          description="Custom theme on your profile"
-          rate="+$2/mo"
-        />
+        {addOnsRates.map((addOn) => (
+          <CheckboxTile
+            key={addOn.plan}
+            label={addOn.plan}
+            description={addOn.description}
+            rate={addOn.rate}
+          />
+        ))}
       </div>
     </div>
   );
