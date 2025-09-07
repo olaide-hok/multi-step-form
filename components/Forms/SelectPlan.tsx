@@ -5,9 +5,18 @@ import Card from "../Card";
 interface SelectPlanProps {
   isYearly: boolean;
   setIsYearly: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedPlan: string;
+  handleSelectPlan: (plan: string, rate: string) => void;
+  error: string;
 }
 
-const SelectPlan = ({ isYearly, setIsYearly }: SelectPlanProps) => {
+const SelectPlan = ({
+  isYearly,
+  setIsYearly,
+  selectedPlan,
+  handleSelectPlan,
+  error,
+}: SelectPlanProps) => {
   const plans = [
     {
       plan: "arcade",
@@ -40,13 +49,17 @@ const SelectPlan = ({ isYearly, setIsYearly }: SelectPlanProps) => {
         {plans.map((plan) => (
           <Card
             key={plan.plan}
-            selected
+            selected={selectedPlan === plan.plan}
             plan={plan.plan}
             rate={plan.rate}
             bonus={plan.bonus}
+            onClick={() => handleSelectPlan(plan.plan, plan.rate)}
           />
         ))}
       </div>
+      {error && (
+        <p className="text-center text-sm text-(--clr-red-500)">{error}</p>
+      )}
 
       <div className="flex w-full items-center justify-center rounded-[0.5rem] bg-(--clr-blue-50) py-[0.84375rem]">
         <div className="flex h-[1.3125rem] items-center gap-(--sp-300)">
