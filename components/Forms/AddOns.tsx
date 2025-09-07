@@ -1,10 +1,20 @@
 "use client";
 
+import { AddOnsRateDataType } from "@/app/page";
+
 interface AddOnsProps {
   isYearly: boolean;
+  selectedAddOns: AddOnsRateDataType[];
+  handleAddOns: (addOn: AddOnsRateDataType) => void;
+  error?: string;
 }
 
-const AddOns = ({ isYearly }: AddOnsProps) => {
+const AddOns = ({
+  isYearly,
+  selectedAddOns,
+  handleAddOns,
+  error,
+}: AddOnsProps) => {
   const addOnsRates = [
     {
       plan: "Online service",
@@ -41,9 +51,15 @@ const AddOns = ({ isYearly }: AddOnsProps) => {
             label={addOn.plan}
             description={addOn.description}
             rate={addOn.rate}
+            selected={selectedAddOns.some((a) => a.plan === addOn.plan)}
+            value={addOn}
+            onChange={handleAddOns}
           />
         ))}
       </div>
+      {error && (
+        <p className="text-center text-sm text-(--clr-red-500)">{error}</p>
+      )}
     </div>
   );
 };
@@ -55,6 +71,8 @@ interface CheckboxTileProps {
   description: string;
   rate: string;
   selected?: boolean;
+  value: AddOnsRateDataType;
+  onChange: (value: AddOnsRateDataType) => void;
 }
 
 const CheckboxTile = ({
@@ -62,6 +80,8 @@ const CheckboxTile = ({
   description,
   rate,
   selected,
+  value,
+  onChange,
 }: CheckboxTileProps) => {
   return (
     <div
@@ -78,7 +98,8 @@ const CheckboxTile = ({
           id={label}
           className="h-[1.25rem] w-[1.25rem] cursor-pointer rounded-[0.25rem] border border-(--clr-purple-200) bg-(--clr-white) checked:border-(--clr-purple-600) checked:bg-(--clr-purple-600)"
           checked={selected}
-          onChange={() => {}}
+          value={JSON.stringify(value)}
+          onChange={() => onChange(value)}
         />
         <label htmlFor={label} className="flex flex-col md:gap-y-(--sp-100)">
           <span className="text-(length:--fs-14) leading-(--lh-150) font-medium text-(--clr-blue-950) md:text-(length:--fs-16) md:leading-(--lh-120)">
