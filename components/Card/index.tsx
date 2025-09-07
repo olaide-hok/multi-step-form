@@ -7,11 +7,13 @@ interface CardProps {
   plan: string;
   rate: string;
   bonus?: string;
+  onClick: () => void;
 }
 
-const Card = ({ selected, plan, rate, bonus }: CardProps) => {
+const Card = ({ selected, plan, rate, bonus, onClick }: CardProps) => {
   return (
     <div
+      onClick={onClick}
       className={`flex items-center gap-x-(--sp-200) rounded-[0.5rem] border border-(--clr-purple-200) lg:flex-col lg:items-start lg:justify-between ${
         selected
           ? "border-(--clr-purple-600) bg-(--clr-blue-50)"
