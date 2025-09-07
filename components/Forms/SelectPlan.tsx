@@ -6,6 +6,7 @@ interface SelectPlanProps {
   isYearly: boolean;
   setIsYearly: React.Dispatch<React.SetStateAction<boolean>>;
   selectedPlan: string;
+  setSelectedPlan: React.Dispatch<React.SetStateAction<string>>;
   handleSelectPlan: (plan: string, rate: string) => void;
   error: string;
 }
@@ -14,6 +15,7 @@ const SelectPlan = ({
   isYearly,
   setIsYearly,
   selectedPlan,
+  setSelectedPlan,
   handleSelectPlan,
   error,
 }: SelectPlanProps) => {
@@ -68,7 +70,10 @@ const SelectPlan = ({
             className={`cursor-pointer text-(length:--fs-14) font-medium ${
               !isYearly ? "text-(--clr-blue-950)" : "text-(--clr-grey-500)"
             }`}
-            onClick={() => setIsYearly(false)}
+            onClick={() => {
+              setIsYearly(false);
+              setSelectedPlan("");
+            }}
           >
             Monthly
           </span>
@@ -76,7 +81,10 @@ const SelectPlan = ({
           {/* Toggle container */}
           <div
             className="relative h-full w-[2.375rem] cursor-pointer rounded-full bg-(--clr-blue-950) transition"
-            onClick={() => setIsYearly(!isYearly)}
+            onClick={() => {
+              setIsYearly(!isYearly);
+              setSelectedPlan("");
+            }}
           >
             {/* Knob */}
             <div
