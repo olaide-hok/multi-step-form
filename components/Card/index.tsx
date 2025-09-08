@@ -5,12 +5,20 @@ import Image from "next/image";
 interface CardProps {
   selected?: boolean;
   plan: string;
-  rate: string;
+  rate: number;
   bonus?: string;
   onClick: () => void;
+  isYearly: boolean;
 }
 
-const Card = ({ selected, plan, rate, bonus, onClick }: CardProps) => {
+const Card = ({
+  selected,
+  plan,
+  rate,
+  bonus,
+  onClick,
+  isYearly,
+}: CardProps) => {
   return (
     <div
       onClick={onClick}
@@ -34,7 +42,8 @@ const Card = ({ selected, plan, rate, bonus, onClick }: CardProps) => {
             {plan}
           </p>
           <span className="text-(length:--fs-14) leading-(--lh-120) text-(--clr-grey-500)">
-            {rate}
+            ${rate}
+            {isYearly ? "/yr" : "/mo"}
           </span>
         </div>
         {bonus && (
