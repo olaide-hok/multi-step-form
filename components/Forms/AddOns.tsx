@@ -17,19 +17,22 @@ const AddOns = ({
 }: AddOnsProps) => {
   const addOnsRates = [
     {
+      id: "addOns1",
       plan: "Online service",
       description: "Access to multiplayer games",
-      rate: isYearly ? "$10/yr" : "$1/mo",
+      rate: isYearly ? 10 : 1,
     },
     {
+      id: "addOns2",
       plan: "Larger storage",
       description: "Extra 1TB of cloud save",
-      rate: isYearly ? "$20/yr" : "$2/mo",
+      rate: isYearly ? 20 : 2,
     },
     {
+      id: "addOns3",
       plan: "Customizable profile",
       description: "Custom theme on your profile",
-      rate: isYearly ? "$20/yr" : "$2/mo",
+      rate: isYearly ? 20 : 2,
     },
   ];
 
@@ -54,6 +57,7 @@ const AddOns = ({
             selected={selectedAddOns.some((a) => a.plan === addOn.plan)}
             value={addOn}
             onChange={handleAddOns}
+            isYearly={isYearly}
           />
         ))}
       </div>
@@ -69,10 +73,11 @@ export default AddOns;
 interface CheckboxTileProps {
   label: string;
   description: string;
-  rate: string;
+  rate: number;
   selected?: boolean;
   value: AddOnsRateDataType;
   onChange: (value: AddOnsRateDataType) => void;
+  isYearly: boolean;
 }
 
 const CheckboxTile = ({
@@ -82,6 +87,7 @@ const CheckboxTile = ({
   selected,
   value,
   onChange,
+  isYearly,
 }: CheckboxTileProps) => {
   return (
     <div
@@ -112,7 +118,8 @@ const CheckboxTile = ({
       </div>
 
       <span className="text-(length:--fs-12) leading-(--lh-120) text-(--clr-purple-600) md:text-(length:--fs-14)">
-        {rate}
+        ${rate}
+        {isYearly ? "/yr" : "/mo"}
       </span>
     </div>
   );
