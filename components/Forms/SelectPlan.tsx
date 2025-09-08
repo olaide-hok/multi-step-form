@@ -1,38 +1,37 @@
 "use client";
 
+import { PlanType } from "@/app/page";
 import Card from "../Card";
 
 interface SelectPlanProps {
   isYearly: boolean;
-  setIsYearly: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedPlan: string;
-  setSelectedPlan: React.Dispatch<React.SetStateAction<string>>;
-  handleSelectPlan: (plan: string, rate: string) => void;
+  selectedPlan: PlanType;
+  handleSelectPlan: (plan: PlanType) => void;
   error: string;
+  handleYearlyToggle: () => void;
 }
 
 const SelectPlan = ({
   isYearly,
-  setIsYearly,
   selectedPlan,
-  setSelectedPlan,
   handleSelectPlan,
+  handleYearlyToggle,
   error,
 }: SelectPlanProps) => {
   const plans = [
     {
       plan: "arcade",
-      rate: isYearly ? "$90/yr" : "$9/mo",
+      rate: isYearly ? 90 : 9,
       bonus: isYearly ? "2 months free" : "",
     },
     {
       plan: "advanced",
-      rate: isYearly ? "$120/yr" : "$12/mo",
+      rate: isYearly ? 120 : 12,
       bonus: isYearly ? "2 months free" : "",
     },
     {
       plan: "pro",
-      rate: isYearly ? "$150/yr" : "$15/mo",
+      rate: isYearly ? 150 : 15,
       bonus: isYearly ? "2 months free" : "",
     },
   ];
@@ -51,11 +50,12 @@ const SelectPlan = ({
         {plans.map((plan) => (
           <Card
             key={plan.plan}
-            selected={selectedPlan === plan.plan}
+            selected={selectedPlan.plan === plan.plan}
             plan={plan.plan}
             rate={plan.rate}
             bonus={plan.bonus}
-            onClick={() => handleSelectPlan(plan.plan, plan.rate)}
+            onClick={() => handleSelectPlan(plan)}
+            isYearly={isYearly}
           />
         ))}
       </div>
@@ -70,10 +70,7 @@ const SelectPlan = ({
             className={`cursor-pointer text-(length:--fs-14) font-medium ${
               !isYearly ? "text-(--clr-blue-950)" : "text-(--clr-grey-500)"
             }`}
-            onClick={() => {
-              setIsYearly(false);
-              setSelectedPlan("");
-            }}
+            onClick={handleYearlyToggle}
           >
             Monthly
           </span>
@@ -81,10 +78,7 @@ const SelectPlan = ({
           {/* Toggle container */}
           <div
             className="relative h-full w-[2.375rem] cursor-pointer rounded-full bg-(--clr-blue-950) transition"
-            onClick={() => {
-              setIsYearly(!isYearly);
-              setSelectedPlan("");
-            }}
+            onClick={handleYearlyToggle}
           >
             {/* Knob */}
             <div
@@ -99,7 +93,7 @@ const SelectPlan = ({
             className={`cursor-pointer text-(length:--fs-14) font-medium ${
               isYearly ? "text-(--clr-blue-950)" : "text-(--clr-grey-500)"
             }`}
-            onClick={() => setIsYearly(true)}
+            onClick={handleYearlyToggle}
           >
             Yearly
           </span>
