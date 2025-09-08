@@ -23,7 +23,7 @@ const PersonalInfo = ({
         </p>
       </div>
 
-      <div className="flex flex-col md:gap-y-(--sp-300) lg:gap-y-(--sp-200)">
+      <div className="flex flex-col gap-y-(--sp-200) md:gap-y-(--sp-300)">
         <TextInput
           name="name"
           label="Name"

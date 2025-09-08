@@ -176,7 +176,7 @@ export default function Home() {
       <div className="relative flex w-full flex-col md:flex-row md:items-start md:pb-(--sp-200)">
         <ProgressSidebar steps={steps} currentStep={currentStep} />
         <div
-          className={`absolute top-[6.03rem] flex h-full flex-col ${showFinalStep ? "justify-center" : "justify-between"} md:relative md:top-0 md:ml-[3.63rem] md:w-[21.75rem] md:p-0 lg:ml-[6.25rem] lg:w-[28.125rem] lg:pb-(--sp-400)`}
+          className={`absolute top-[6.03rem] flex h-full flex-col justify-normal ${showFinalStep ? "md:justify-center" : "md:justify-between"} md:relative md:top-0 md:ml-[3.63rem] md:w-[21.75rem] md:p-0 lg:ml-[6.25rem] lg:w-[28.125rem] lg:pb-(--sp-400)`}
         >
           {currentStep < steps.length &&
             !showFinalStep &&
