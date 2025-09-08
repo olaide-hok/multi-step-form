@@ -9,37 +9,158 @@ import SelectPlan from "@/components/Forms/SelectPlan";
 import ProgressSidebar from "@/components/Progress-Sidebar";
 import FinalStep from "@/components/Forms/FinalStep";
 
+export type PersonalInfoFormDataType = {
+  name: string;
+  email: string;
+  phone: string;
+};
+
+export type AddOnsRateDataType = {
+  id: string;
+  plan: string;
+  description: string;
+  rate: number;
+};
+
+export type PlanType = {
+  plan: string;
+  rate: number;
+  bonus: string;
+};
+
 export default function Home() {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [showFinalStep, setShowFinalStep] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
 
+  const [personalInfoForm, setPersonalInfoForm] =
+    useState<PersonalInfoFormDataType>({
+      name: "",
+      email: "",
+      phone: "",
+    });
+
+  const [formErrors, setFormErrors] = useState<
+    Partial<PersonalInfoFormDataType>
+  >({});
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<PersonalInfoFormDataType> = {};
+    if (!personalInfoForm.name) {
+      newErrors.name = "Name is required";
+    }
+    if (!personalInfoForm.email) {
+      newErrors.email = "Email is required";
+    }
+    if (!personalInfoForm.phone) {
+      newErrors.phone = "Phone is required";
+    }
+    setFormErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPersonalInfoForm({
+      ...personalInfoForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Selected Plan
+  const [selectedPlan, setSelectedPlan] = useState<PlanType>({
+    plan: "",
+    rate: 0,
+    bonus: "",
+  });
+  const [selectedPlanError, setSelectedPlanError] = useState<string>("");
+  const handleSelectedPlan = (plan: PlanType) => {
+    setSelectedPlan(plan);
+    setSelectedPlanError(""); // clear error once a plan is picked
+  };
+
+  // Add-on
+  const [selectedAddOns, setSelectedAddOns] = useState<AddOnsRateDataType[]>(
+    [],
+  );
+  const [selectedAddOnsError, setSelectedAddOnsError] = useState<string>("");
+
+  const handleAddOns = (addOn: AddOnsRateDataType) => {
+    setSelectedAddOns((prev) =>
+      prev.some((a) => a.plan === addOn.plan)
+        ? prev.filter((a) => a.plan !== addOn.plan)
+        : [...prev, addOn],
+    );
+    setSelectedAddOnsError("");
+  };
+
+  const handleYearlyToggle = () => {
+    setIsYearly(!isYearly);
+    setSelectedPlan({ plan: "", rate: 0, bonus: "" });
+    setSelectedAddOns([]);
+  };
+
   const steps = [
     {
       id: 1,
       name: "Your Info",
-      component: <PersonalInfo />,
+      component: (
+        <PersonalInfo
+          errors={formErrors}
+          handleFormChange={handleFormChange}
+          inputValues={personalInfoForm}
+        />
+      ),
     },
     {
       id: 2,
       name: "Select Plan",
-      component: <SelectPlan isYearly={isYearly} setIsYearly={setIsYearly} />,
+      component: (
+        <SelectPlan
+          isYearly={isYearly}
+          selectedPlan={selectedPlan}
+          handleSelectPlan={handleSelectedPlan}
+          error={selectedPlanError}
+          handleYearlyToggle={handleYearlyToggle}
+        />
+      ),
     },
     {
       id: 3,
       name: "Add-ons",
-      component: <AddOns isYearly={isYearly} />,
+      component: (
+        <AddOns
+          isYearly={isYearly}
+          selectedAddOns={selectedAddOns}
+          handleAddOns={handleAddOns}
+          error={selectedAddOnsError}
+        />
+      ),
     },
     {
       id: 4,
       name: "Summary",
-      component: <FinishUp />,
+      component: (
+        <FinishUp
+          addOns={selectedAddOns}
+          isYearly={isYearly}
+          plan={selectedPlan}
+        />
+      ),
     },
   ];
 
   const nextStep = () => {
     if (currentStep === steps.length - 1) return;
+    if (currentStep === 0 && !validateForm()) return;
+    if (currentStep === 1 && !selectedPlan) {
+      setSelectedPlanError("Please select a plan before proceeding");
+      return;
+    }
+    if (currentStep === 2 && selectedAddOns.length === 0) {
+      setSelectedAddOnsError("Please select an add-on before proceeding");
+      return;
+    }
     setPreviousStep(currentStep);
     setCurrentStep((step) => step + 1);
   };
