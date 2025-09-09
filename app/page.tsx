@@ -166,7 +166,7 @@ export default function Home() {
   const nextStep = () => {
     if (currentStep === steps.length - 1) return;
     if (currentStep === 0 && !validateForm()) return;
-    if (currentStep === 1 && !selectedPlan) {
+    if (currentStep === 1 && !selectedPlan?.plan) {
       setSelectedPlanError("Please select a plan before proceeding");
       return;
     }
