@@ -23,7 +23,7 @@ const ProgressSidebar = ({ steps, currentStep }: ProgressSidebarProps) => {
               currentStep + 1 === step.id
                 ? bgActive
                 : "border border-(--clr-white) text-(--clr-white)"
-            } h-[2.0625rem] w-[2.0625rem] cursor-pointer rounded-full text-(length:--fs-14) leading-(--lh-120) font-bold tracking-[0.0625rem]`}
+            } h-[2.0625rem] w-[2.0625rem] rounded-full text-(length:--fs-14) leading-(--lh-120) font-bold tracking-[0.0625rem]`}
           >
             {step.id}
           </button>
