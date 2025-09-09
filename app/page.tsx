@@ -8,6 +8,7 @@ import PersonalInfo from "@/components/Forms/PersonalInfo";
 import SelectPlan from "@/components/Forms/SelectPlan";
 import ProgressSidebar from "@/components/Progress-Sidebar";
 import FinalStep from "@/components/Forms/FinalStep";
+import z from "zod";
 
 export type PersonalInfoFormDataType = {
   name: string;
@@ -28,6 +29,15 @@ export type PlanType = {
   bonus: string;
 };
 
+const personalInfoSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z
+    .string()
+    .email({ message: "Must be a valid email address" })
+    .min(1, "Email is required"),
+  phone: z.string().min(1, "Phone is required"),
+});
+
 export default function Home() {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
@@ -42,22 +52,25 @@ export default function Home() {
     });
 
   const [formErrors, setFormErrors] = useState<
-    Partial<PersonalInfoFormDataType>
+    Partial<Record<keyof PersonalInfoFormDataType, string>>
   >({});
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<PersonalInfoFormDataType> = {};
-    if (!personalInfoForm.name) {
-      newErrors.name = "Name is required";
+    const result = personalInfoSchema.safeParse(personalInfoForm);
+
+    if (!result.success) {
+      const errors: Partial<Record<keyof PersonalInfoFormDataType, string>> =
+        {};
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as keyof PersonalInfoFormDataType;
+        errors[field] = issue.message;
+      });
+      setFormErrors(errors);
+      return false;
     }
-    if (!personalInfoForm.email) {
-      newErrors.email = "Email is required";
-    }
-    if (!personalInfoForm.phone) {
-      newErrors.phone = "Phone is required";
-    }
-    setFormErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+
+    setFormErrors({});
+    return true;
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
